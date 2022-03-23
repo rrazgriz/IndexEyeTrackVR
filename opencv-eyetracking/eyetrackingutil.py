@@ -4,7 +4,7 @@
 import numpy as np
 import math
 import scipy
-from scipy.interpolate import griddata
+import scipy.interpolate
 import cv2
 
 ## Utility Functions
@@ -125,16 +125,15 @@ def extrapolate_nans(x_values, y_values, values):
     return values
 
 # Generate luts given a list of cal points and cal values
-def generate_luts(cal_points, cal_values, crop = ()):
+def generate_luts(cal_points, cal_values, grid_width, grid_height):
     # create evenly spaced grid
-    x_count, y_count = (crop[0][1], crop[1][1])
-    grid_x, grid_y = np.mgrid[range(0, x_count, 1), range(0, y_count, 1)]
+    grid_x, grid_y = np.mgrid[range(0, grid_width, 1), range(0, grid_height, 1)]
 
     # build grid data and extrapolate with nearest neighbor using NaN mask
-    lx = griddata(cal_points, cal_values[:,0], (grid_x, grid_y), method='linear', fill_value=np.nan)
+    lx = scipy.interpolate.griddata(cal_points, cal_values[:,0], (grid_x, grid_y), method='linear', fill_value=np.nan)
     lx = extrapolate_nans(grid_x, grid_y, lx)
 
-    ly = griddata(cal_points, cal_values[:,1], (grid_x, grid_y), method='linear', fill_value=np.nan)
+    ly = scipy.interpolate.griddata(cal_points, cal_values[:,1], (grid_x, grid_y), method='linear', fill_value=np.nan)
     ly = extrapolate_nans(grid_x, grid_y, ly)
     
     return lx, ly
@@ -149,7 +148,7 @@ def generate_calibration(frames_cal, points_cal, detector, threshold=127, crop=(
         cal_keypoints.append(k)
         cal_positions.append(cal_point)
 
-    lx, ly = generate_luts(cal_positions, points_cal, crop)
+    lx, ly = generate_luts(cal_positions, points_cal, crop[0][1], crop[1][1])
 
     return lx, ly, cal_positions, cal_keypoints
     
