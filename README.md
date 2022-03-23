@@ -44,7 +44,7 @@ Currently, the following hardware is being used for testing. There is no guarant
 - [IN-P32ZTIR IR Diode](https://www.digikey.com/en/products/detail/inolux/IN-P32ZTIR/10384796), run at 35 mA - 5V w/ 100ohm resistor 
 
 ## 3d Printed Mounts
-`cam_ov2640_wideangle_facegasket_mount*.stl` is used to mount the 160-degree, wide-angle variant of the OV2640. The lens snaps into place, and the LED and associated resistor
+`cam_ov2640_wideangle_facegasket_mount*.stl` is used to mount the 160-degree, wide-angle variant of the OV2640. The lens snaps into place, and the LED and associated resistor are superglued in place. The assembly is adhered to the lens gasket with double sided tape (3M VHB recommended). The ESP32-Cam (desoldered from its headers after OTA firmware is flashed) is also adhered with tape. 
 
 # Licensing
 Unless otherwise specified, items in this repsitory are licensed as such.
