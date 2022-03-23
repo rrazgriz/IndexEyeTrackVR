@@ -1,12 +1,13 @@
 # Copyright 2022-2022 Razgriz
 # SPDX-License-Identifier: MIT
 
+import os
 import time
 import configparser
 import pathlib
-from ast import literal_eval 
 import logging
 import datetime
+from ast import literal_eval 
 from pythonosc import udp_client
 from collections import deque
 
@@ -24,10 +25,15 @@ config = configparser.ConfigParser()
 config.read(path + '\\eyetracking_config.cfg')
 
 log_level = int(config['eyetrack']['log_level'])
+log_folder = config['eyetrack']['log_folder']
+
+log_folder_path = f'{path}{log_folder}'
+if not os.path.exists(log_folder_path):
+    os.makedirs(log_folder_path)
 
 logging.basicConfig(
     format='%(asctime)s %(levelname)-8s %(message)s',
-    filename=f'{path}\\logs\\eyetracking-{start_time}.log', 
+    filename=f'{path}{log_folder}eyetracking-{start_time}.log', 
     level=log_level)
 
 logging.info('Started Eyetracking program')
