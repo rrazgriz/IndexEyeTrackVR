@@ -1,0 +1,4 @@
+*.pyc
+
+opencv-eyetracking/test-data/
+opencv-eyetracking/logs/
