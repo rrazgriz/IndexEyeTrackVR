@@ -46,6 +46,8 @@ Currently, the following hardware is being used for testing. There is no guarant
 ## 3d Printed Mounts
 `cam_ov2640_wideangle_facegasket_mount*.stl` is used to mount the 160-degree, wide-angle variant of the OV2640. The lens snaps into place, and the LED and associated resistor are superglued in place. The assembly is adhered to the lens gasket with double sided tape (3M VHB recommended). The ESP32-Cam (desoldered from its headers after OTA firmware is flashed) is also adhered with tape. 
 
+The mounts were printed in PLA with a 0.4mm nozzle at 0.2mm layer height with no supports. A brim is recommended. These parts are very small, so make sure to print carefully. Any standard 3d printing polymer should work (PLA, PETG, ABS, ASA).
+
 # Licensing
 Unless otherwise specified, items in this repsitory are licensed as such.
 
