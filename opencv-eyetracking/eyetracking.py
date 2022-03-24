@@ -7,9 +7,9 @@ import configparser
 import pathlib
 import logging
 import datetime
+import cv2
 from ast import literal_eval 
 from pythonosc import udp_client
-from collections import deque
 
 from eyetrackingutil import *
 
@@ -114,7 +114,7 @@ gaze = np.array([0.0,0.0])
 gaze_smooth = gaze
 exp_smooth(gaze, gaze_smooth, 0)
 gaze_fade_length = int(literal_eval(config['eyetrack']['gaze_fade_length']))
-gaze_fade = deque(np.full((gaze_fade_length,3), int(0)))
+gaze_fade = np.array([np.full((gaze_fade_length,3), int(0))])
 
 dt = 1/60
 smoothing_tau = float(literal_eval(config['eyetrack']['filter_by_area']))
@@ -156,8 +156,9 @@ logging.info('Starting Eye Tracking')
 # Just gonna send it bud
 while True:
     # Capture frame-by-frame
-    ret, f = cap.read()
     start = time.time()
+
+    ret, f = cap.read()
 
     # if frame is read correctly ret is True
     if not ret:
@@ -187,7 +188,7 @@ while True:
     frame_gaze = np.zeros_like(frame)
     frame_gaze = cv2.cvtColor(frame_gaze, cv2.COLOR_GRAY2BGR)
     # Faded trail
-    gaze_fade.append(np.array([int((1 - (gaze[0] + 1.0) * 0.5) * xw), int((1 - (gaze[1] + 1.0) * 0.5) * yw), 255]))
+    np.append(gaze_fade, np.array([int((1 - (gaze[0] + 1.0) * 0.5) * xw), int((1 - (gaze[1] + 1.0) * 0.5) * yw), 255]))
     for index, point in enumerate(gaze_fade):
         if index < len(gaze_fade) - 1:
             gaze_fade[index][2] = clamp(gaze_fade[index][2] - int(255.0/float(gaze_fade_length)), 0, 255)
@@ -195,6 +196,8 @@ while True:
             pt1 = (gaze_fade[index+1][0], gaze_fade[index+1][1])
             cv2.line(frame_gaze, tupint(pt0), tupint(pt1), (int(gaze_fade[index][2]), 0, 0), thickness=2)
             # print(index, gaze_fade[index], gaze_fade[index+1])
+    if len(gaze_fade) > gaze_fade_length:
+        gaze_fade = gaze_fade[:gaze_fade_length]
     frame_gaze = cv2.resize(frame_gaze, display_size, interpolation = cv2.INTER_AREA)
 
     # Gaze Pos (x/y)
@@ -218,6 +221,10 @@ while True:
             logging.debug('Unblink/Eye Detected')
     was_blinking = is_blinking;
 
+    end = time.time()
+
+    dt = (end - start)
+    
     # Display frames
     if show_original_source:
         cv2.imshow('Source', f)
@@ -227,11 +234,7 @@ while True:
     if cv2.waitKey(25) == ord('q'):
         is_quitting = True
         break
-
-    end = time.time()
-
-    dt = (end - start)
-    logging.debug(f'Frame time: {dt}')
+    logging.debug(f'Processing time: {round(dt * 1000, 2)}ms  Frame time:{round((time.time() - start)*1000,2)}ms')
 
 
 # If the user didn't exit early, wait for key entry
