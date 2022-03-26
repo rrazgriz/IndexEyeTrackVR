@@ -4,7 +4,34 @@ Hardware/Software repo for DIY eye tracking on the Valve Index (and potentially 
 This repo represents much of my personal work done alongside/with the [EyeTrackVR Project](https://github.com/RedHawk989/EyeTrackVR).
 
 ## **DISCLAIMER**
-This is a *work-in-progress* repo and project and should not be expected to contain full, up-to-date documentation, source code, models, or anything else. Don't expect anything here to "just work", or to work at all, nor support to be available for it!
+This is a *work-in-progress* repo and project and should not be expected to contain full, up-to-date documentation, source code, models, or anything else. Don't expect anything here to "just work", or to work at all, nor support to be available for it! 
+
+## **SAFETY** 
+This project involves shining near-infrared band light directly at your eyes. If running as designed, we should be operating in safe limits. The eye's natural pupillary light reflex foes not trigger for IR light in the same way it does for optical light. This means that if blasted with high intensity IR, the pupil will not constrict to limit the intensity. This is especially important when the pupil can be significantly dialated from the low light intensity in VR.
+
+If something were to happen like a resistor shorting, it would be possible to send significant quantities of IR light into the eye, possibly without the user ever feeling a thing, or noticing beyond the dim red glow becoming a bit brighter. 
+
+Building and using this kind of hardware is done at your own discretion and risk, and any contributors to this project cannot be considered responsible for any adverse effects. 
+
+## **You are responsible for your own safety!**
+
+### Light Intensity calculation
+
+The International Commission on Non-Ionizing Radiation Protection (ICNIRP)'s ["Guidelines of limits of exposure to broad-band incoherent optical radiation (0.38 to 3 µm)"](https://www.icnirp.org/cms/upload/publications/ICNIRPbroadband.pdf) states:
+
+> To avoid thermal injury of the cornea and possible delayed effects on the lens of the eye (cataractogenesis), infrared radiation (780nm < > λ < > 3μm) should be limited to 100 W m⁻² (10 mW cm⁻²) for lengthy exposures (> 1000 s) [...]
+
+Driving an IN-P32ZTIR (850nm, 4.5 mW/sr @ 20 mA) at 5 volts with a 100 ohm resistor gives:
+
+```I = V/R = (5.0 - 1.5)/100 = 0.035 A = 35 mA --> 4.5 mW/sr * (35mA/ 20mA) = 7.875 mW/sr```
+
+The LED distance is approximately 32mm from eye depending on facial geometry, which we round to 3 cm, giving an area of one steradian (sr) at 3cm dist -> 3 cm²/sr. Our final intensity is:
+
+`(7.875 mW/sr) / (3 cm²/sr) = 2.625 mW/cm²`. 
+
+This is within a safe range when operating as designed.
+
+
 
 # Software
 The ESP32Cam is running [slightly modified Futurabeast face cam firmware](https://github.com/rrazgriz/futura-face-cam) for the moment. In theory, it can run any firmware that outputs an opencv-compatible stream available over the network. [OpenIris](https://github.com/lorow/OpenIris) is being developed specifically for use in the EyeTrackVR Project.
@@ -65,5 +92,5 @@ Futurabeast - [Futurabeast face cam firmware](https://github.com/rrazgriz/futura
 
 Valve Software - [Index Hardware CAD](https://github.com/ValveSoftware/IndexHardware) (licensed under CC-BY-NC-SA-4.0)
 
-# Images
-![Camera/ESP Mounting](./images/camera_esp_mounting_2022-03-22.png)
+# Media
+![Camera/ESP Mounting](./media/camera_esp_mounting_2022-03-22.png)
