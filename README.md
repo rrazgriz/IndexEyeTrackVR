@@ -94,3 +94,9 @@ Valve Software - [Index Hardware CAD](https://github.com/ValveSoftware/IndexHard
 
 # Media
 ![Camera/ESP Mounting](./media/camera_esp_mounting_2022-03-22.png)
+
+https://user-images.githubusercontent.com/47901762/160254647-f92e436d-78cc-42f1-9b42-50ed9ba449d1.mp4
+
+https://user-images.githubusercontent.com/47901762/160254653-4695fb8c-6ce4-4c03-9f54-f484273bd840.mp4
+
+
