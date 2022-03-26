@@ -7,7 +7,7 @@ This repo represents much of my personal work done alongside/with the [EyeTrackV
 This is a *work-in-progress* repo and project and should not be expected to contain full, up-to-date documentation, source code, models, or anything else. Don't expect anything here to "just work", or to work at all, nor support to be available for it! 
 
 ## **SAFETY** 
-This project involves shining near-infrared band light directly at your eyes. If running as designed, we should be operating in safe limits. The eye's natural pupillary light reflex foes not trigger for IR light in the same way it does for optical light. This means that if blasted with high intensity IR, the pupil will not constrict to limit the intensity. This is especially important when the pupil can be significantly dialated from the low light intensity in VR.
+This project involves shining near-infrared band light directly at your eyes. If running as designed, we should be operating in safe limits. The eye's natural pupillary light reflex does not trigger for IR light in the same way it does for optical light. This means that if blasted with high intensity IR, the pupil will not constrict to limit the intensity. This is especially important when the pupil can be significantly dialated from the low light intensity in VR.
 
 If something were to happen like a resistor shorting, it would be possible to send significant quantities of IR light into the eye, possibly without the user ever feeling a thing, or noticing beyond the dim red glow becoming a bit brighter. 
 
@@ -36,7 +36,7 @@ This is within a safe range when operating as designed.
 # Software
 The ESP32Cam is running [slightly modified Futurabeast face cam firmware](https://github.com/rrazgriz/futura-face-cam) for the moment. In theory, it can run any firmware that outputs an opencv-compatible stream available over the network. [OpenIris](https://github.com/lorow/OpenIris) is being developed specifically for use in the EyeTrackVR Project.
 
-The software side uses a basic Python OpenCV pipeline to process the image data. It requires python3 with `python-osc` and `opencv` available. Other techniques are being implemented elsewhere in the EyeTrackvR Project, including the [VrEyeToolbox](https://github.com/SummerSigh/VrEyeToolbox), which focuses on machine learning approaches to eye parameter estimation.
+The software side uses a basic Python OpenCV pipeline to process the image data. It requires python3 with `python-osc` and `opencv` available. Other techniques are being implemented elsewhere in the EyeTrackVR Project, including the [VrEyeToolbox](https://github.com/SummerSigh/VrEyeToolbox), which focuses on machine learning approaches to eye parameter estimation.
 
 To run the eyetracking software, configure it as below, and run it in a python environment that has all dependencies satisfied, as noted above. 
 
@@ -76,7 +76,7 @@ Currently, the following hardware is being used for testing. There is no guarant
 The mounts were printed in PLA with a 0.4mm nozzle at 0.2mm layer height with no supports. A brim is recommended. These parts are very small, so make sure to print carefully. Any standard 3d printing polymer should work (PLA, PETG, ABS, ASA).
 
 # Licensing
-Unless otherwise specified, items in this repsitory are licensed as such.
+Unless otherwise specified, items in this repository are licensed as such.
 
 |   |   |
 |---|---|
