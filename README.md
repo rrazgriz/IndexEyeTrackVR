@@ -80,7 +80,7 @@ Unless otherwise specified, items in this repository are licensed as such.
 
 |   |   |
 |---|---|
-| 3D Printing Source Files (STL/3MF) | [CC-BY-SA-4.0](https://spdx.org/licenses/CC-BY-SA-4.0.html) |
+| 3D Printing Source Files (STL/3MF) | [CC-BY-NC-SA-4.0](https://spdx.org/licenses/CC-BY-NC-SA-4.0.html) |
 | Images/Media | [CC-BY-SA-4.0](https://spdx.org/licenses/CC-BY-SA-4.0.html) |
 | Software Files | [MIT](https://spdx.org/licenses/MIT.html) |
 
