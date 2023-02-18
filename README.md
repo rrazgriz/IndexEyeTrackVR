@@ -1,3 +1,7 @@
+# 🛑Notice
+
+This repo is out of date. Updated development on Eye Tracking for the Valve Index can be found at https://docs.eyetrackvr.dev/
+
 # IndexEyeTrackVR
 Hardware/Software repo for DIY eye tracking on the Valve Index (and potentially other) VR headset. This is intended to emulate the functionality of existing VR eye tracking solutions, and is particularly focused on feeding eye data into social apps such as VRChat.
 
